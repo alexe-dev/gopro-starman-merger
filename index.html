@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoPro × Starman Optical: a merger racing a bank deadline</title>
+<meta name="description" content="What the September 1, 2026 GoPro merger agreement requires, how the deadlines chain together, and what can be read between the lines. Compiled from SEC filings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F4F6;
+  --sheet:#FFFFFF;
+  --ink:#18212D;
+  --muted:#566273;
+  --rule:#CDD4DC;
+  --filing:#1D4F91;
+  --filing-soft:#DCE6F3;
+  --deadline:#B3261E;
+  --deadline-soft:#F4DCDA;
+  --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"IBM Plex Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#131A23;
+    --sheet:#19222E;
+    --ink:#E3E8EE;
+    --muted:#9AA6B5;
+    --rule:#2E3A48;
+    --filing:#86AEE6;
+    --filing-soft:#223349;
+    --deadline:#F0786E;
+    --deadline-soft:#3D2226;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.125rem;line-height:1.62}
+a{color:var(--filing);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--filing);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+.prose{max-width:44rem}
+header.hero{padding:4.5rem 0 2.5rem}
+.kicker{font-family:var(--sans);font-size:.9rem;color:var(--muted);margin:0 0 1.25rem}
+h1{font-weight:500;font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:1.06;letter-spacing:-.015em;margin:0 0 1.25rem;max-width:18ch}
+.dek{font-size:1.3rem;line-height:1.5;color:var(--muted);max-width:40rem;margin:0}
+h2{font-weight:500;font-size:clamp(1.55rem,3vw,2.05rem);line-height:1.15;letter-spacing:-.01em;margin:0 0 1rem}
+h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;line-height:1.35;margin:1.9rem 0 .4rem}
+section{padding:3rem 0;border-top:1px solid var(--rule)}
+p{margin:0 0 1rem}
+.note{font-family:var(--sans);font-size:.92rem;color:var(--muted);line-height:1.55}
+.est{font-family:var(--sans);font-size:.78em;font-weight:500;color:var(--muted);border:1px solid var(--rule);border-radius:3px;padding:0 .3em;margin-left:.2em;white-space:nowrap}
+
+/* Squeeze timeline (hero element) */
+.squeeze{margin:3rem 0 0;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:1.5rem 1.5rem 1.25rem}
+.squeeze-title{font-family:var(--sans);font-size:.95rem;font-weight:600;margin:0 0 .25rem}
+.squeeze-sub{font-family:var(--sans);font-size:.88rem;color:var(--muted);margin:0}
+.track{position:relative;height:250px;margin:0 3.5rem}
+.bar{position:absolute;left:0;right:0;top:118px;height:14px;background:var(--filing-soft);border-radius:2px}
+.band{position:absolute;top:118px;height:14px;left:33.3%;width:38.9%;background:repeating-linear-gradient(90deg,var(--filing) 0 2px,transparent 2px 7px);opacity:.45}
+.wall{position:absolute;top:104px;height:42px;left:96%;width:4%;background:repeating-linear-gradient(135deg,var(--deadline) 0 3px,var(--deadline-soft) 3px 7px);border-left:2px solid var(--deadline);border-right:2px solid var(--deadline)}
+.wall-label{position:absolute;top:150px;left:98%;transform:translateX(-50%);font-family:var(--sans);font-size:.75rem;font-weight:600;color:var(--deadline);white-space:nowrap}
+.m{position:absolute;top:0;height:100%;width:0}
+.m::before{content:"";position:absolute;left:-5px;top:120px;width:10px;height:10px;border-radius:50%;background:var(--sheet);border:2px solid var(--filing)}
+.m.hard::before{border-color:var(--deadline);background:var(--deadline)}
+.m .lbl{position:absolute;width:9.5rem;font-family:var(--sans);font-size:.8rem;line-height:1.3;transform:translateX(-50%)}
+.m .lbl b{display:block;font-weight:600;font-size:.84rem}
+.m .lbl span{color:var(--muted)}
+.m.up .lbl{bottom:142px}
+.m.down .lbl{top:142px}
+.m.up::after,.m.down::after{content:"";position:absolute;left:0;border-left:1px solid var(--rule)}
+.m.up::after{top:88px;height:30px}
+.m.down::after{top:132px;height:8px}
+.m.hard .lbl b{color:var(--deadline)}
+.m.left .lbl{transform:none;left:-5px}
+.m.right .lbl{transform:none;right:-5px;text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:1.25rem;font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:.25rem 0 0}
+.legend i{display:inline-block;width:22px;height:10px;vertical-align:-1px;margin-right:.4rem}
+.legend .lg-band{background:repeating-linear-gradient(90deg,var(--filing) 0 2px,transparent 2px 7px);opacity:.6}
+.legend .lg-wall{background:repeating-linear-gradient(135deg,var(--deadline) 0 3px,var(--deadline-soft) 3px 7px)}
+@media (max-width:820px){
+  .track{height:auto;margin:1.25rem 0 0}
+  .bar,.band,.wall,.wall-label{display:none}
+  .m{position:relative;height:auto;width:auto;left:auto!important;padding:0 0 .9rem 1.4rem;border-left:2px solid var(--filing-soft)}
+  .m::before{left:-7px;top:.3rem}
+  .m::after{display:none}
+  .m .lbl,.m.left .lbl,.m.right .lbl{position:static;transform:none;width:auto;text-align:left}
+  .m.hard{border-left-color:var(--deadline-soft)}
+}
+
+/* Deal facts */
+dl.facts{display:grid;grid-template-columns:minmax(9rem,13rem) 1fr;gap:.55rem 1.5rem;margin:1.5rem 0 0;max-width:52rem}
+dl.facts dt{font-family:var(--sans);font-size:.9rem;font-weight:600;padding-top:.2rem}
+dl.facts dd{margin:0}
+@media (max-width:600px){dl.facts{grid-template-columns:1fr;gap:.1rem}dl.facts dd{margin-bottom:.8rem}}
+
+/* Business-day calendar */
+.cal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;max-width:34rem;margin:1.5rem 0 .75rem;font-family:var(--sans)}
+.cal .h{font-size:.75rem;color:var(--muted);padding:0 .35rem .2rem}
+.cal .d{background:var(--sheet);border:1px solid var(--rule);border-radius:3px;min-height:3.4rem;padding:.3rem .4rem;position:relative}
+.cal .d .n{font-size:.85rem;font-weight:500}
+.cal .d .c{position:absolute;right:.4rem;bottom:.25rem;font-size:.95rem;font-weight:600;color:var(--filing)}
+.cal .d .t{display:block;font-size:.68rem;color:var(--muted);line-height:1.2;margin-top:.1rem}
+.cal .off{opacity:.4}
+.cal .hol{background:repeating-linear-gradient(135deg,transparent 0 5px,var(--filing-soft) 5px 9px)}
+.cal .sign{border-color:var(--filing);border-width:2px}
+.cal .due{border-color:var(--deadline);border-width:2px;background:var(--deadline-soft)}
+.cal .due .c{color:var(--deadline)}
+
+/* Steps */
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:1.5rem 0 0;max-width:46rem}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 1.1rem 2.6rem}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:.1rem;width:1.7rem;height:1.7rem;border-radius:50%;border:1.5px solid var(--filing);color:var(--filing);font-family:var(--sans);font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+ol.steps li b{font-family:var(--sans);font-size:.98rem;font-weight:600}
+
+/* Tables */
+.tbl{overflow-x:auto;margin:1.5rem 0 1rem;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-family:var(--sans);font-size:.92rem;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:.65rem .9rem;border-bottom:1px solid var(--rule)}
+thead th{font-weight:600;font-size:.85rem;color:var(--muted)}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-weight:600;white-space:nowrap}
+tr.crit td{background:var(--deadline-soft)}
+
+.callout{border-left:3px solid var(--deadline);padding:.2rem 0 .2rem 1.1rem;margin:1.5rem 0;max-width:44rem}
+.callout p{margin:0}
+
+/* Takeaways */
+.takeaways{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:2rem 2.5rem;margin-top:1.5rem}
+.takeaways h3{margin-top:0;font-size:1.05rem}
+.takeaways p{font-size:1.02rem}
+
+/* Watch list */
+ul.watch{list-style:none;padding:0;margin:1.5rem 0 0;max-width:48rem}
+ul.watch li{display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rule)}
+ul.watch li:last-child{border-bottom:0}
+ul.watch .when{font-family:var(--sans);font-weight:600;font-size:.92rem}
+ul.watch .hard .when{color:var(--deadline)}
+@media (max-width:560px){ul.watch li{grid-template-columns:1fr;gap:.1rem}}
+
+ul.src{padding-left:1.1rem;max-width:48rem}
+ul.src li{margin-bottom:.45rem}
+footer{padding:2.5rem 0 4rem;border-top:1px solid var(--rule)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <p class="kicker">Deal notes, compiled from SEC filings as of September 29, 2026</p>
+  <h1>GoPro × Starman Optical: a merger racing a bank deadline</h1>
+  <p class="dek">What the September 1, 2026 merger agreement actually requires, how its dates chain together, and what the filings suggest about who holds the leverage.</p>
+
+  <figure class="squeeze" aria-labelledby="sq-title">
+    <p class="squeeze-title" id="sq-title">126 days from signing to the bank's payoff deadline</p>
+    <p class="squeeze-sub">Scaled to calendar days, September 1, 2026 to about January 5, 2027. Dates marked est. are estimates.</p>
+    <div class="track">
+      <div class="bar"></div>
+      <div class="band" title="Window where SEC clearance can land"></div>
+      <div class="wall" title="Gap between outside date and bank deadline"></div>
+      <div class="wall-label">5 days</div>
+
+      <div class="m up left" style="left:0%"><div class="lbl"><b>Sep 1</b><span>Merger agreement signed</span></div></div>
+      <div class="m down" style="left:23%"><div class="lbl"><b>Sep 30</b><span>Preliminary proxy due (20th Business Day)</span></div></div>
+      <div class="m up" style="left:33.3%"><div class="lbl"><b>~Oct 13</b><span>Earliest definitive proxy, if no SEC review</span></div></div>
+      <div class="m down" style="left:51.6%"><div class="lbl"><b>~Nov 5</b><span>Q3 results expected (est.)</span></div></div>
+      <div class="m up" style="left:55.6%"><div class="lbl"><b>~Nov 10</b><span>Earliest stockholder vote</span></div></div>
+      <div class="m down" style="left:72.2%"><div class="lbl"><b>~Dec 1–2</b><span>Last practical date to mail the proxy</span></div></div>
+      <div class="m up hard" style="left:96%"><div class="lbl"><b>Dec 31</b><span>Outside date in the merger agreement</span></div></div>
+      <div class="m down hard right" style="left:100%"><div class="lbl"><b>~Jan 5, 2027</b><span>Wells Fargo revolver must be paid off</span></div></div>
+    </div>
+    <p class="legend"><span><i class="lg-band"></i>Where SEC clearance can realistically land</span><span><i class="lg-wall"></i>Buffer between outside date and bank deadline</span></p>
+  </figure>
+</header>
+</div>
+
+<main>
+<div class="wrap">
+
+<section id="deal">
+  <h2>The deal in brief</h2>
+  <div class="prose">
+    <p>Starman Optical, a subsidiary of Action Acquisitions LLC, merges into GoPro. GoPro survives as a subsidiary of Action Acquisitions and stays listed on Nasdaq. Public holders take cash plus a small stake in the combined company, and GoPro's debt is repaid at closing.</p>
+  </div>
+  <dl class="facts">
+    <dt>Parties</dt><dd>GoPro, Inc. (the Company); Action Acquisitions LLC (Parent); Starman Optical, Inc. (Merger Sub). Midtown Equities LLC has committed to fund Parent's payments.</dd>
+    <dt>Per GoPro share</dt><dd>$1.14 in cash, subject to a downward adjustment for a net working capital shortfall, plus 0.1 share of the surviving corporation. Class A and Class B shares receive the same consideration.</dd>
+    <dt>Aggregate</dt><dd>About $285 million in cash to holders, who keep roughly 10% of the company. About $92 million of GoPro debt is repaid at closing.</dd>
+    <dt>Vote required</dt><dd>A majority of outstanding common stock, voting as a single class. Class B carries 10 votes per share, which works out to roughly 59% of total voting power on the August 31 share counts. <span class="est">est.</span></dd>
+    <dt>Termination fee</dt><dd>$10 million, payable by GoPro in specified cases, including a switch to a superior proposal.</dd>
+    <dt>Outside date</dt><dd>December 31, 2026. Either side may terminate if the merger has not closed by then.</dd>
+    <dt>Advisors</dt><dd>Houlihan Lokey delivered the fairness opinion; Fenwick &amp; West is GoPro's counsel.</dd>
+  </dl>
+</section>
+
+<section id="proxy">
+  <h2>The first hard date: September 30</h2>
+  <div class="prose">
+    <p>Section 5.3 requires GoPro to prepare and file the proxy statement in preliminary form with the SEC "as soon as practicable following the date hereof", and in any event within 20 Business Days of the September 1 signing.</p>
+    <p>"Business Day" is a defined term. It excludes weekends and any day banks in San Mateo, California or New York City are required or authorized to close. That makes Labor Day, September 7, a non-counting day, so the 20th Business Day is Wednesday, September 30.</p>
+  </div>
+
+  <div class="cal" role="table" aria-label="September 2026 business-day count">
+    <div class="h" role="columnheader">Mon</div><div class="h" role="columnheader">Tue</div><div class="h" role="columnheader">Wed</div><div class="h" role="columnheader">Thu</div><div class="h" role="columnheader">Fri</div>
+    <div class="d off"><span class="n">Aug 31</span></div>
+    <div class="d sign"><span class="n">1</span><span class="t">Signed</span></div>
+    <div class="d"><span class="n">2</span><span class="c">1</span></div>
+    <div class="d"><span class="n">3</span><span class="c">2</span></div>
+    <div class="d"><span class="n">4</span><span class="c">3</span></div>
+    <div class="d hol"><span class="n">7</span><span class="t">Labor Day, not counted</span></div>
+    <div class="d"><span class="n">8</span><span class="c">4</span></div>
+    <div class="d"><span class="n">9</span><span class="c">5</span></div>
+    <div class="d"><span class="n">10</span><span class="c">6</span></div>
+    <div class="d"><span class="n">11</span><span class="c">7</span></div>
+    <div class="d"><span class="n">14</span><span class="c">8</span></div>
+    <div class="d"><span class="n">15</span><span class="c">9</span></div>
+    <div class="d"><span class="n">16</span><span class="c">10</span></div>
+    <div class="d"><span class="n">17</span><span class="c">11</span></div>
+    <div class="d"><span class="n">18</span><span class="c">12</span></div>
+    <div class="d"><span class="n">21</span><span class="c">13</span></div>
+    <div class="d"><span class="n">22</span><span class="c">14</span></div>
+    <div class="d"><span class="n">23</span><span class="c">15</span></div>
+    <div class="d"><span class="n">24</span><span class="c">16</span></div>
+    <div class="d"><span class="n">25</span><span class="c">17</span></div>
+    <div class="d"><span class="n">28</span><span class="c">18</span></div>
+    <div class="d"><span class="n">29</span><span class="c">19</span></div>
+    <div class="d due"><span class="n">30</span><span class="t">Deadline</span><span class="c">20</span></div>
+    <div class="d off"><span class="n">Oct 1</span><span class="t">Late</span></div>
+    <div class="d off"><span class="n">Oct 2</span></div>
+  </div>
+  <p class="note">Forgetting Labor Day gives September 29, one day early. September 30 is a normal Business Day, so the agreement's roll-forward rule does not apply. Under EDGAR rules, a filing submitted after 5:30 p.m. Eastern generally receives the next business day's filing date, so the safe reading is to file before then on September 30. No preliminary proxy had surfaced in public search as of September 29.</p>
+</section>
+
+<section id="path">
+  <h2>From proxy to closing</h2>
+  <div class="prose">
+    <p>After the preliminary filing, the path to closing runs through the SEC, a stockholder meeting with long notice periods, and antitrust clearance in parallel.</p>
+  </div>
+  <ol class="steps">
+    <li><b>Preliminary proxy filed</b><br>Due by September 30. It will carry Q2 financials, since Q3 is not yet closed.</li>
+    <li><b>SEC waiting period and possible review</b><br>Rule 14a-6(a) requires at least 10 calendar days before the definitive proxy is sent. In typical practice the SEC signals within about 10 days whether it will review; if it does, first comments usually arrive about 30 days after filing, followed by one or more response rounds.</li>
+    <li><b>Definitive proxy filed and mailed</b><br>Section 5.3 ties this to the later of the SEC comments being resolved and the 10-day period expiring. GoPro must also set a record date and complete the broker search under Rule 14a-13.</li>
+    <li><b>Stockholder meeting</b><br>Section 5.4: no sooner than 20 Business Days after SEC clearance, with notice at least 20 Business Days before the meeting. That is stricter than Delaware's 20 calendar days.</li>
+    <li><b>HSR clearance, in parallel</b><br>Expiration or termination of the Hart-Scott-Rodino waiting period (normally 30 days) is a closing condition. A Second Request would add months.</li>
+    <li><b>Closing</b><br>No later than the second Business Day after the last condition is met. For closing and the outside date, a Business Day is a day the Delaware Secretary of State accepts the certificate of merger.</li>
+  </ol>
+  <p class="note">Bank holidays that do not count as Business Days in the remaining window: October 12, November 11, November 26 and December 25.</p>
+
+  <h3>Two scenarios</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Milestone</th><th>No SEC review</th><th>Full SEC review</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Preliminary proxy</td><td>September 30</td><td>September 30</td></tr>
+        <tr><td class="k">SEC clearance, definitive proxy</td><td>About October 13 (the 10-day period ends Saturday, October 10; October 12 is a holiday)</td><td>Mid to late November</td></tr>
+        <tr><td class="k">Earliest meeting</td><td>About November 10</td><td>Clearance around November 20 puts the meeting no earlier than about December 21</td></tr>
+        <tr><td class="k">Closing, if HSR has cleared</td><td>Mid-November</td><td>About December 22–24</td></tr>
+        <tr class="crit"><td class="k">Slack before December 31</td><td>About six weeks</td><td>About one week</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <p>The critical date is about December 1–2. Counting 20 Business Days from a December 1 clearance, with Christmas excluded, gives a meeting no earlier than December 30. Any later clearance does not fit inside the outside date without an extension. The agreement's Business Day definition refers to extensions of the outside date, so a mechanism likely exists in Section 7.1; its terms were not reviewed here.</p>
+  </div>
+</section>
+
+<section id="anchor">
+  <h2>Why September 30 is not really about Q3</h2>
+  <div class="prose">
+    <p>The preliminary proxy deadline lands on the last day of the third quarter. That looks deliberate, but it follows mechanically from a September 1 signing and a 20 Business Day term, which is a common market choice. There is no obvious benefit to the coincidence: Q3 numbers will not exist until November either way.</p>
+    <p>The date that does look engineered is the outside date. On July 9, 2026, GoPro's fee letter with Wells Fargo set three terms that shape the whole schedule:</p>
+  </div>
+  <dl class="facts">
+    <dt>Payoff deadline</dt><dd>Within 180 days after July 9, 2026, GoPro must complete a refinancing, sale or other transaction that pays the revolving credit facility in full. That is about January 5, 2027. <span class="est">est.</span></dd>
+    <dt>Weekly repayments</dt><dd>$250,000 a week from October 9, 2026, rising to $1 million a week from November 6, 2026, until January 1, 2027.</dd>
+    <dt>New draws</dt><dd>Further borrowing under the revolver is at the lenders' discretion.</dd>
+  </dl>
+  <h3>The schedule, worked backward</h3>
+  <ol class="steps">
+    <li><b>About January 5, 2027</b><br>The revolver must be repaid in full.</li>
+    <li><b>December 31, 2026</b><br>The merger agreement's outside date sits a few days inside the bank deadline.</li>
+    <li><b>About two to two and a half months earlier</b><br>Room for an SEC review plus 20 Business Days of meeting notice.</li>
+    <li><b>End of September</b><br>The preliminary proxy has to be on file by then, which a 20 Business Day term from September 1 delivers.</li>
+  </ol>
+  <p class="note">The merger agreement also requires that, before closing, no lender under GoPro's credit agreements has accelerated payments, after giving effect to waivers. Missing the January date is therefore close to fatal for the deal as structured.</p>
+</section>
+
+<section id="earnings">
+  <h2>Where Q3 earnings fit</h2>
+  <div class="prose">
+    <p>GoPro has not announced its Q3 2026 date. Market calendars show about November 5. <span class="est">est.</span> In 2026 the company reported Q1 on May 11 and Q2 on August 10, about 41 days after quarter end, which would point to around November 9–10. That pattern is also consistent with a 45-day 10-Q deadline, which would fall on Monday, November 16. <span class="est">est.</span></p>
+  </div>
+  <h3>Financial statements go stale in mid-November</h3>
+  <div class="prose">
+    <p>Under Regulation S-X Rule 3-12, financial statements in a proxy must be recent relative to the mailing date. June 30 statements age out on about November 7 under the 130-day rule for accelerated filers, or November 12 under the 135-day rule for other filers. Whether the rule bites depends on what financial information the SEC requires in this proxy, but because holders receive stock in the combined company, that seems likely.</p>
+    <p>In the no-review scenario, mailing in mid-October uses Q2 numbers, but Q3 results arrive right around the vote and may need a proxy supplement. In the full-review scenario, mailing falls after mid-November, so the proxy needs September 30 numbers. The Q3 close then becomes part of the critical path to the December 1–2 cutoff.</p>
+  </div>
+  <h3>Two more connections</h3>
+  <div class="prose">
+    <p>The September 30 balance sheet is the first public look at net working capital after signing, which is what can reduce the $1.14. And a weak quarter alone does not let the buyer walk: failing to meet projections is excluded from the Material Adverse Effect definition, although the causes behind a miss can still count.</p>
+  </div>
+</section>
+
+<section id="takeaways">
+  <h2>Reading between the lines</h2>
+  <p class="note">These are interpretations of public filings, not facts stated in them.</p>
+  <div class="takeaways">
+    <div>
+      <h3>A rescue, not a sale at the top</h3>
+      <p>A hard payoff date, weekly bank repayments, discretionary draws, a Q2 net loss of $51 million and negative $29 million adjusted EBITDA put GoPro under heavy pressure. The fair comparison for $1.14 plus 10% is the likely alternative without a deal, which is some form of restructuring.</p>
+    </div>
+    <div>
+      <h3>A back-door listing for Starman</h3>
+      <p>A private company ends up owning about 90% of a Nasdaq-listed business with more than 2,500 U.S. patents and a known brand. Nasdaq rules generally require a company that combines with a non-Nasdaq business in a change of control to re-qualify under initial listing standards (Rule 5110(a)). The agreement has a Nasdaq Listing covenant in Section 5.15; staying listed may not be automatic.</p>
+    </div>
+    <div>
+      <h3>The risk is time, not the vote</h3>
+      <p>With Class B holding about 59% of the votes, the outcome is close to settled. The five days between December 31 and January 5 are the real constraint. SEC review, HSR, Nasdaq or Starman's audited financials could each push the schedule, and leverage shifts toward the buyer as January approaches, which is when a distressed target is most exposed to a price re-negotiation.</p>
+    </div>
+    <div>
+      <h3>GoPro's remedy against the buyer is slow</h3>
+      <p>GoPro's disclosed protection is the right to seek specific performance of Midtown Equities' funding commitment; the public summary mentions no reverse termination fee. A lawsuit takes weeks or months, which matters little against a January wall. Little is public about Action Acquisitions, Starman or Midtown, so the proxy will be the first detailed look at the buyer.</p>
+    </div>
+    <div>
+      <h3>The founder is on several sides</h3>
+      <p>Nick Woodman controls the vote through Class B, lent $20 million through affiliated trusts on notes that must be redeemed on a change of control, holds warrants for 25.7 million Class B shares that are cashed out at a Black-Scholes value, and stays on as an officer. An independent committee approved the July financing. The summary does not mention a special committee or a majority-of-the-minority vote for the merger itself. Deals with non-ratable benefits to a controlling holder commonly draw stockholder suits; transaction litigation is excluded from the MAE, so suits would not let the buyer walk, but they could cost time.</p>
+    </div>
+    <div>
+      <h3>The $1.14 is a ceiling</h3>
+      <p>Debt outstanding at signing is excluded from net working capital, so paying it down with cash lowers working capital, and borrowing after signing counts against it. Weekly bank repayments come to about $9 million by year end, on top of operating losses. <span class="est">est.</span> How close that brings GoPro to the adjustment threshold depends on a number that is not public in the materials reviewed.</p>
+    </div>
+    <div>
+      <h3>Employees roll over on better terms than the public</h3>
+      <p>On a literal reading of Section 2.7, each unvested RSU and PSU converts into an award over one surviving-corporation share, while each public share receives 0.1 share plus cash. With about 9.6 million RSUs and up to 4.9 million PSUs outstanding, that could be a large block next to the roughly 20.6 million new shares going to public holders. <span class="est">est.</span> The proxy should explain the intent.</p>
+    </div>
+    <div>
+      <h3>What the stock price implies</h3>
+      <p>Around $1.33 on September 28, the market pays about $0.19 above the cash for 0.1 new share. That implies roughly $1.90 per new share and about $390 million for the combined company, before any public Starman financials. <span class="est">est.</span> Published analyst targets near $0.50 hint at the downside if the deal breaks.</p>
+    </div>
+  </div>
+</section>
+
+<section id="watch">
+  <h2>Dates to watch</h2>
+  <ul class="watch">
+    <li class="hard"><span class="when">Sep 30</span><span>Preliminary proxy. Look for the background of the merger, whether a special committee was used, the founder's interests, Starman's financials and the working capital threshold.</span></li>
+    <li><span class="when">Oct 9–10</span><span>Whether the SEC will review the proxy becomes clear. Weekly $250,000 revolver repayments begin.</span></li>
+    <li><span class="when">~Nov 5</span><span>Q3 results, the first look at working capital after signing. <span class="est">est.</span></span></li>
+    <li><span class="when">Nov 6</span><span>Weekly revolver repayments rise to $1 million.</span></li>
+    <li><span class="when">Nov 7–12</span><span>June 30 financials age out for proxy purposes.</span></li>
+    <li class="hard"><span class="when">~Dec 1–2</span><span>Last practical date to clear and mail the proxy for a vote by year end.</span></li>
+    <li class="hard"><span class="when">Dec 31</span><span>Outside date.</span></li>
+    <li class="hard"><span class="when">~Jan 5, 2027</span><span>Wells Fargo payoff deadline.</span></li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2>Sources and method</h2>
+  <ul class="src">
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001500435/000162828026060181/gpro2026-09x028xkexhibit21.htm">Agreement and Plan of Merger, Exhibit 2.1 to Form 8-K (filed September 2, 2026)</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001500435/000162828026060181/gpro-20260901.htm">Form 8-K, Item 1.01 summary of the merger agreement</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/1500435/000162828026059839/gpro2026-09x01exhibit991.htm">Press release announcing the merger, Exhibit 99.1 (September 1, 2026)</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/1500435/000162828026059846/a20260901schedule14acomms.htm">Schedule 14A soliciting communications (September 1, 2026)</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001500435/000162828026047943/gpro-20260709.htm">Form 8-K on the July 9, 2026 credit agreement amendments and fee letter</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001500435/000150043526000028/gpro-20260701.htm">Form 8-K on the founder financing (July 2026)</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001500435/000150043526000034/gpro2026-6x30ex991xer.htm">Q2 2026 results press release (August 10, 2026)</a></li>
+  </ul>
+  <p class="note">The merger agreement was read directly through the representations in Article III. Sections 5.3 and 5.4 were checked against indexed excerpts of the filing, and other covenants rely on GoPro's own 8-K summary; Sections 5.15, 5.18 and 7.1 were not reviewed in full. Business-day counts, voting power, the implied valuation and scenario dates are the author's calculations and are marked est. Stock price and analyst targets come from third-party market data. SEC review timing reflects typical practice, not a rule.</p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="note">Independent analysis of public documents, not affiliated with GoPro, Starman Optical or any party to the transaction. Not legal, tax or investment advice. Filings may have been amended or superseded since September 29, 2026; check EDGAR for the latest.</p>
+  </div>
+</footer>
+
+</body>
+</html>
